@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+  <script src="JS/firebaseCalls.js"></script>
+  <script src="JS/methods.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+  <script>
+  var config = {
+    // Initialize Firebase
+    // TODO: Replace with your project's customized code snippet
+      apiKey: "AIzaSyD5m4M9WxvtSzXoLJwE0HCNBa10542IN-g",
+      authDomain: "app-l-133e5.firebaseapp.com",
+      databaseURL: "https://app-l-133e5.firebaseio.com",
+      projectId: "app-l-133e5",
+      storageBucket: "app-l-133e5.appspot.com",
+      messagingSenderId: "939170253210"
+    };
+    firebase.initializeApp(config);
+     storage = firebase.storage;
+    // firebase.app().storage("gs://app-l-133e5.appspot.com/");
+  </script>
+</script>
+<script>
+var user = firebase.auth().currentUser;
+firebase.auth().onAuthStateChanged(function(user) {
+if (user) {
+  // User is signed in.
+  //Redirect to home
+  //redirectHome();
+   //alert('Thanks for tering'+user.username);
+} else {
+  // No user is  signed in.
+}
+});
+</script>
+</head>
+<nav class="navbar is-transparent">
+  <!-- <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div> -->
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item"  id="account_btn" onclick="redirectAbout()">
+        About
+      </a>
+      <a class="navbar-item"  id="login_button" onclick="redirectLogin()">
+        Sign In
+      </a>
+    </div>
+    <div class="navbar-end">
+  </div>
+</nav>
+
+<div class="container">
+<body onload="checkUserLoggedIn();loadFooter()">
+<img src="Images/cityscape.png" style="display:block;margin:auto;margin-top:24px;height:120px;width:120px"></img>
+<div class="title" style="text-align:center;margin-top:48px">
+  Sign up with Threads for free and take a stand against the machines today!
+</div>
+  <nav class="level" style=";margin-top:48px">
+    <div class = "level-item">
+
+  <div class="field" style="width:380px;">
+     <label class="label"><b>*Email:</b></label>
+   <p class="control has-icons-left">
+ <input class="input" type="text" placeholder="Enter Email" name="email"  id="email_reg" required >
+ <span class="icon is-small is-left">
+     <i class="fa fa-envelope"></i>
+   </span>
+</div>
+</div>
+<div class = "level-item">
+
+  <div class="field" style="width:380px;">
+  <label class="label"><b>First name</b></label>
+  <p class="control has-icons-left">
+  <input class="input" type="text" placeholder="Enter Your First Name" name="fname" id="fname_reg" required>
+  <span class="icon is-small is-left">
+      <i class="fa fa-user-circle"></i>
+    </span>
+</div>
+</div>
+<div class = "level-item">
+  <div class="field" style="width:380px;">
+    <label class="label"><b>Last Name</b></label>
+    <p class="control has-icons-left">
+  <input class="input" type="text" placeholder="Enter Your Last Name" name="lname" id="lname_reg" required>
+  <span class="icon is-small is-left">
+      <i class="fa fa-user-circle"></i>
+    </span>
+</div>
+</div>
+</nav>
+
+<nav class="level">
+<div class = "level-item">
+<div class="field" style="width:380px;">
+    <label class="label"><b>Password</b></label>
+    <p class="control has-icons-left">
+   <input class="input" type="password" placeholder="Enter Password (6 Characters or longer)" name="psw" id="password_reg" required>
+   <span class="icon is-small is-left">
+       <i class="fa fa-key"></i>
+     </span>
+</div>
+</div>
+<div class = "level-item">
+<div class="field" style="width:380px;">
+    <label class="label"><b>Address</b></label>
+    <p class="control has-icons-left">
+    <input class="input" type="text" placeholder="Enter Your Address" name="address" id="address_reg" required>
+    <span class="icon is-small is-left">
+        <i class="fa fa-home"></i>
+      </span>
+    </div>
+  </div>
+  <div class = "level-item">
+<div class="field" style="width:380px;">
+    <label class="label"><b>Phone</b></label>
+    <p class="control has-icons-left">
+    <input class="input" type="text" placeholder="Enter Your Phone Number" name="phone" id="phone_reg" required>
+    <span class="icon is-small is-left">
+        <i class="fa fa-phone"></i>
+      </span>
+</div>
+</div>
+</nav>
+
+
+<nav class="level">
+<div class = "level-item">
+<div class="field" style="width:380px;">
+    <label class="label"><b>City</b></label>
+    <p class="control has-icons-left">
+   <input class="input" type="text" placeholder="Enter Current City" name="city" id="city_reg" required>
+   <span class="icon is-small is-left">
+       <i class="fa fa-map-pin"></i>
+     </span>
+   </div>
+ </div>
+ <div class = "level-item">
+
+<div class="field" style="width:380px;">
+    <label class="label"><b>State</b></label>
+    <p class="control has-icons-left">
+    <input class="input" type="text" placeholder="Enter Current State" name="state" id="state_reg" required>
+    <span class="icon is-small is-left">
+        <i class="fa fa-map-pin"></i>
+      </span>
+</div>
+</div>
+<div class = "level-item">
+
+<div class="field" style="width:380px;">
+    <label class="label"><b>Zipcode/Postal</b></label>
+    <p class="control has-icons-left">
+    <input class="input" type="text" placeholder="Enter Your Zip Code/Postal" name="zip" id="zip_reg" zip_reg>
+    <span class="icon is-small is-left">
+        <i class="fa fa-map-pin"></i>
+      </span>
+</div>
+</div>
+</nav>
+
+<nav class="level">
+<div class = "level-item">
+<div class="field" style="width:380px;">
+    <label class="label"><b>Country</b></label>
+    <p class="control has-icons-left">
+   <input class="input" type="text" placeholder="Enter Current Country" name="country" id="country_reg" required>
+   <span class="icon is-small is-left">
+       <i class="fa fa-globe"></i>
+     </span>
+ </div>
+</div>
+<div class = "level-item">
+
+   <div class="field" style="width:380px;">
+    <label class="label"><b>Are you Willing to travel</b></label>
+    <p class="control has-icons-left">
+    <input class="input" type="text" placeholder="Are you open to traveling for jobs that fit you very well" name="travel" id="travel_reg" required>
+    <span class="icon is-small is-left">
+        <i class="fa fa-plane"></i>
+      </span>
+  </div>
+</div>
+<div class = "level-item">
+
+    <div class="field" style="width:380px;">
+    <label class="label"><b>Tags that represent what you're looking for</b></label>
+    <p class="control has-icons-left">
+    <input class="input" type="text" placeholder="(Optional) Tech;Big4;" name="tags" id="tags_reg" zip_reg>
+    <span class="icon is-small is-left">
+        <i class="fa fa fa-hashtag"></i>
+      </span>
+  </div>
+</div>
+</nav>
+<nav class="level">
+<div class = "level-item" style="width:380px">
+<div>
+<label class="label"><b>Upload Resume (PDF)</b></label>
+<div class="file has-name">
+  <label class="file-label">
+    <input class="file-input" type="file" id="resumeFile" accept=".pdf" onchange="resumePopup()"></input>
+    <span class="file-cta">
+      <span class="file-icon">
+        <i class="fa fa-upload"></i>
+      </span>
+      <span class="file-label">
+        Choose a file…
+      </span>
+    </span>
+    <span class="file-name">
+      ..
+    </span>
+  </label>
+</div>
+</div>
+</div>
+<div class = "level-item" style="width:380px">
+
+<!-- <nav class="level"> -->
+<div>
+<label class="label"><b>Upload Cover Letter (PDF) </b></label>
+<div class="file has-name" >
+  <label class="file-label" >
+    <input class="file-input" type="file" id="coverFile"  accept=".pdf" onchange="coverPopup()" ></input>
+    <span class="file-cta" >
+      <span class="file-icon">
+        <i class="fa fa-upload"  ></i>
+      </span>
+      <span class="file-label">
+        Choose a file…
+      </span>
+    </span>
+    <span class="file-name">
+      ..
+    </span>
+  </label>
+</div>
+</div>
+</div>
+<div class = "level-item" style="width:380px">
+<div style="width:380px">
+<label class="label"><b>Select An Industry </b></label>
+<div class="field">
+  <div class="control">
+    <div class="select is-info">
+    <select style="width:380px" id="soflow">
+  <option>Select an Industry</option>
+  <option>Technology</option>
+  <option>Business</option>
+</select>
+</div>
+</div>
+</div>
+  </div>
+</div>
+</nav>
+<nav class="level">
+  <div class="level-item has-text-centered">
+<label for="subscribeNews" class="checkbox">
+<input class="checkbox" type="checkbox" id="alert" name="subscribe" value="newsletter">Alert me about new jobs that match my tags
+</label>
+</div>
+</nav>
+
+<nav class="level-right">
+  <div class="level-item has-text-centered">
+ <button class="button is-primary"  style="width:380px"type="submit" id="register" onclick="register()">Register</button>
+</div>
+</nav>
+ <!-- <input type="checkbox" checked="checked"> Remember me</input> -->
+ <!-- <span class="login_forgotpw">Forgot <a href="#">password?</a></span> -->
+<!-- </div> -->
+</div>
+<footer class="footer" style="margin-top:100px;">
+  <div id = "footerArea">
+  </div>
+</footer>
+</body>
+<!-- </div> -->
+</html>

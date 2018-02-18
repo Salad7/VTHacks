@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<script src="JS/firebaseCalls.js"></script>
+<script src="JS/methods.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://static.tutsplus.com/assets/favicon-3ef7b4f54ed4378b31ff3124d3c4bff8.png" rel="shortcut icon" type="image/png">
+<link href="https://static.tutsplus.com/assets/apple-touch-icon-3ef7b4f54ed4378b31ff3124d3c4bff8.png" rel="apple-touch-icon" type="image/png">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<!--analytics-->
+<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+<!-- <script src="http://tutsplus.github.io/github-analytics/ga-tracking.min.js"></script> -->
+<link rel="stylesheet" href="css/circle.css">
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+<!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5243324285359809",
+    enable_page_level_ads: true
+  });
+</script> -->
+<script src="JS/methods.js"></script>
+<script src="JS/graph-plot.js"></script>
+<script>
+var config = {
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+    apiKey: "AIzaSyD5m4M9WxvtSzXoLJwE0HCNBa10542IN-g",
+    authDomain: "app-l-133e5.firebaseapp.com",
+    databaseURL: "https://app-l-133e5.firebaseio.com",
+    projectId: "app-l-133e5",
+    storageBucket: "",
+    messagingSenderId: "939170253210"
+  };
+  firebase.initializeApp(config);
+  </script>
+</script>
+<script>
+
+</script>
+
+<header>
+  <button2 class = "floated" type='button' id="logout_btn" onclick="logout()" >Sign Out</button2>
+  <button2 class = "floated" type='button' id="account_btn" onclick="redirectAccount()" >My Account</button2>
+  <button2 class = "floated" type='button' id="logout_btn" onclick="redirectLogin()" >Sign In</button2>
+  <button2 class = "floated" type='button' id="logout_btn" onclick="redirectRegister()" >Register</button2>
+</header>
+<div class="content">
+<body onload="" style="background:#FAFAFA">
+  <h1 style="color:#666566;font-family:arial;margin-top:5%;;font-weight:bold;text-align:center;margin-top:8%">Getting Started Is Easy</h1>
+<div class="card" style="width:1200px;height:460px;background:#ffffff;margin:auto;margin-top:5%;">
+  <img src="Intros/search.png" style="width:100%;height:360px;"></img>
+  <h1 style="text-align:center;font-weight:lighter;">Simply copy and paste the job application link in our engine.</h1>
+</div>
+<h1 style="color:#666566;font-family:arial;margin-top:5%;;font-weight:bold;text-align:center;margin-top:8%">What We Do</h1>
+<section style="margin:auto;display:block;width:3000px;">
+  <div style="float:left;margin-right:16px;margin-bottom:24px;">
+    <div class = "card" style="width:470px;height:330px;background:#ffffff;margin:auto;margin-top:4%">
+      <div>
+      <img src="Intros/brain.png" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px"></img>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:8px;font-size:22px" >Sentiment Analysis</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">We find the patterns in behind the big data </h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">To understand what makes you unique and help <u>you</u> stick out</h1>
+    </div>
+    </div>
+
+  </div>
+  <div style="float:left;margin-bottom:24px;">
+    <div class = "card" style="width:470px;height:330px;background:#ffffff;margin:auto;margin-top:4%">
+      <div>
+      <img src="Intros/buzz.png" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px"></img>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:8px;font-size:22px" >Buzzword extraction</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">Your resume is your word.</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">We'll help tailor your resume to fit the needs of the position</h1>
+    </div>
+    </div>
+  </div>
+  <div style="float:left;margin-left:16px;margin-bottom:24px;">
+    <div class = "card" style="width:470px;height:330px;background:#ffffff;margin:auto;margin-top:4%">
+      <div>
+      <img src="Intros/lottery.png" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px"></img>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:8px;font-size:22px" >ATS System Check</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">Don't let a <s>gramer</s> mistake stop you at the door.</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px;">Get your resume on the monitor of recruiters consistently</h1>
+    </div>
+    </div>
+  </div>
+</section>
+<br style="clear: left;" />
+<h1 style="color:#666566;font-family:arial;margin-top:5%;;font-weight:bold;text-align:center;margin-top:8%"></h1>
+<div class="card" style="width:1200px;height:460px;background:#ffffff;margin:auto;margin-top:5%;">
+  <img src="Intros/example.png" style="width:100%;height:360px;"></img>
+  <h1 style="text-align:center;font-weight:lighter;">We'll give you detailed feedback on how you can tailor your resume for the position</h1>
+</div>
+<h1 style="color:#666566;font-family:arial;margin-top:5%;;font-weight:bold;text-align:center;margin-top:18%">Feedback on every job you have eyes on</h1>
+<div class="card" style="width:1200px;height:460px;background:#ffffff;margin:auto;margin-top:5%;">
+  <img src="Intros/analysis.png" style="width:100%;height:360px;"></img>
+  <h1 style="text-align:center;font-weight:lighter;">We determine a score that measures your fit relative to the position, and to your peers</h1>
+</div>
+<h1 style="color:#666566;font-family:arial;margin-top:5%;;font-weight:bold;text-align:center;margin-top:8%">Register today for free access to all of our features</h1>
+<section style="margin:auto;display:block;width:1300px;">
+  <div style="float:left;margin-right:8px;margin-bottom:24px;">
+    <div class = "card" style="width:600px;height:400px;background:#ffffff;margin:auto;margin-top:4%;">
+      <img src="images/chrome.png" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px"></img>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:22px" >Download our chrome extension to get estimate your fit</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:18px">Visit websites directly and run analysis with our extension</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:18px">Results are emailed and stored on your Threads portal</h1>
+       <button style="margin-top:300px;;margin:auto;display:block;color:white;line-height:11px;text-align: center;height: 46px;background: #4285f4;border: 0;border-radius: 2px;font: inherit;font-weight: normal;height: 46px;letter-spacing: .75px;padding: 15px 23px;text-shadow: none;text-transform: uppercase;transition: color .15s linear,background-color .15s linear;font: 400 13.3333px Arial;">
+        DOWNLOAD EXTENSION</button>
+    </div>
+  </div>
+  <div style="float:left;margin-bottom:24px;">
+    <div class = "card" style="width:600px;height:400px;background:#ffffff;margin:auto;margin-top:4%;margin-left:8px">
+      <div>
+      <img src="images/threads.png" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px"></img>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:22px" >Visit your personal portal for jobs</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:18px">Manage all of the jobs you've requested analysis on</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:18px">View detailed feedback and track your progress among peers </h1>
+        <div style = "margin:auto;display:block;width:375px;">
+       <button style="float:left;margin-right:16px;color:white;line-height: 1;text-align: center;height: 46px;background: #4285f4;border: 0;border-radius: 2px;font: inherit;font-weight: normal;height: 46px;letter-spacing: .75px;padding: 15px 23px;text-shadow: none;text-transform: uppercase;transition: color .15s linear,background-color .15s linear;vertical-align: middle;font: 400 13.3333px Arial;"
+       >REGISTER ACCOUNT</button>
+       <button style="float:left;margin-left:16px;color:white;line-height: 1;text-align: center;height: 46px;background: #4285f4;border: 0;border-radius: 2px;font: inherit;font-weight: normal;height: 46px;letter-spacing: .75px;padding: 15px 23px;text-shadow: none;text-transform: uppercase;transition: color .15s linear,background-color .15s linear;vertical-align: middle;font: 400 13.3333px Arial;"
+       >VISIT PORTAL</button>
+     </div>
+    </div>
+    </div>
+  </div>
+</section>
+<br style="clear: left;" />
+</body>
+</div>
+</html>

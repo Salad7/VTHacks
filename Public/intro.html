@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<script src="JS/initFirebase.js"></script>
+<script src="JS/firebaseCalls.js"></script>
+<script src="JS/methods.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script>
+var config = {
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+    apiKey: "AIzaSyD5m4M9WxvtSzXoLJwE0HCNBa10542IN-g",
+    authDomain: "app-l-133e5.firebaseapp.com",
+    databaseURL: "https://app-l-133e5.firebaseio.com",
+    projectId: "app-l-133e5",
+    storageBucket: "",
+    messagingSenderId: "939170253210"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+var user = firebase.auth().currentUser;
+firebase.auth().onAuthStateChanged(function(user) {
+if (user) {
+  // User is signed in.
+  //Redirect to home
+  redirectHome();
+  //alert('login successful, welcome back '+user.email);
+} else {
+  // No user is  signed in.
+  //alert('Nobody is signed in')
+  redirectHome();
+}
+});
+</script>
+<body>
+  <div class = "header_">
+  <header>
+    <h1>
+  App.ly
+    </h1>
+  </header>
+  </div>
+
+<table>
+<td1>
+  <button3 class = "button3" type='button' id="login_btn" onclick="redirectLogin()" >Login</button3>
+</td1>
+  <td2>
+    <button4 class = "button4" type='button' id="register_btn" onclick="redirectRegister()" >Register</button4>
+  </td2>
+</table>
+<div class="card2" id="intro_1">
+<br>
+<p class ="p_title">
+It's your time, you should spend it repeating the application process.
+</p>
+<p class="p_subtitle">Skip to chase
+</p>
+<br>
+</div>
+<div class="card2" id="intro_2">
+<br>
+<p class ="p_title">
+Simplicity, at it's finest.
+</p>
+<p class="p_subtitle">
+Applying for jobs is as easy as a mouse click
+</p>
+<br>
+</div>
+<div class="card2" id="intro_3">
+<br>
+<p class ="p_title">
+
+</p>
+<p class="p_subtitle">The average job application takes 22 minutes to complete.
+</p>
+<br>
+</div>
+</body>
+<footer>
+  <p class="p_footertitle">Developed by Yurp, Inc.</p>
+  <p class="p_footersubtitle">Contact information: <a href="yurp@yurpinc.com">
+  yurp@yurpinc.com</a>.</p>
+</footer>
+
+</html>
