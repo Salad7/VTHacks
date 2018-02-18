@@ -1,0 +1,106 @@
+Mohamed Salad
+Software Engineer
+https://github.com/salad7 704-579-9523 2301 Jordi Way
+Experience
+CEO, Founder
+
+Education
+Bachelors Degree
+
+June 2016 - Present
+
+August 2014 - Present
+
+Yurp Inc
+
+UNC-Charlotte
+
+The idea for Yurp is to provide students a place they can view all school events and post
+pictures for all to see on campus. My role was full implementation of the frontend and
+backend. From the full Android/Swift source code to the firebase backend. To process
+images we incorporated the google cloud vision API combined with a Python script on
+Heroku.
+
+Major - Computer Science Minor - Mathematics
+
+Software Analyst
+
+June 2016 - August 2016
+
+Bank of America
+Monitored Splunk database for anomalies. Toggled features for mobile application in biweekly app releases. Tested mobile app deep links. Designed and won competition for
+internal tool that would improve productivity within the bank. Diagnosed and solved
+problems that impacted users before escalation thus increasing UX.
+
+Clubs & Organizations
+President
+
+August 2017 - Present
+
+Charlotte Hack Club
+The mission of the Charlotte Hack Club is to build a community of problem solvers, critical
+thinkers and represent UNCC at Major League Hacking and any other Hackathon
+competitions regionally, nationally and internationally.
+
+Treasurer
+
+August 2015 - January 2016
+
+STARS
+The mission of the STARS (Students & Technology in Academia, Research & Service)
+Alliance is to increase the participation of women, under-represented minorities, and
+persons with disabilities in computing.
+
+Skills
+
+Interests
+
+Teamwork , Programming , Mobile Development , Databases , Hardware ,
+Software Engineering , Networking , Linux , Windows , Interfacing ,
+Coordination , Agile Development
+
+Mobile technologies , Augmented Reality , History , Latest technologies ,
+Hackathons
+
+Languages
+C++
+
+Awards and Recognition
+Chancellors List
+
+August 2014 - January 2015
+
+UNC-Charlotte
+Statefarm best security hack
+
+Spring 2017
+
+Georgia State
+University
+Won Statefarms security track by building mobile app, with a backed on firebase and
+communication with Arduino and a dynamic web page.
+https://devpost.com/software/apoint-me
+
+Java
+
+C#
+
+Databases
+
+C
+
+Python
+
+Web servers
+
+Best Use of Location from Yik Yak
+
+Spring 2016
+
+Tennessee
+University
+The basic idea of the app uses ardiuno to count the amount of cars going and leaving a
+parking garage using the Arduino Uno's ultrasonic senor, to ensure reliablilty of apps car
+count. https://devpost.com/software/volhacks-nicrh2
+
+

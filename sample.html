@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+<script src="JS/firebaseCalls.js"></script>
+<script src="JS/methods.js"></script>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<!--asnalytics-->
+<link rel="stylesheet" href="css/circle.css">
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+<!-- <script src="server.js"></script> -->
+<script src="JS/methods.js"></script>
+<script src="JS/graph-plot.js"></script>
+<script>
+var config = {
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+    apiKey: "AIzaSyD5m4M9WxvtSzXoLJwE0HCNBa10542IN-g",
+    authDomain: "app-l-133e5.firebaseapp.com",
+    databaseURL: "https://app-l-133e5.firebaseio.com",
+    projectId: "app-l-133e5",
+    storageBucket: "app-l-133e5.appspot.com",
+    messagingSenderId: "939170253210"
+  };
+  firebase.initializeApp(config);
+  storage = firebase.storage;
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "ca-pub-123456789",
+enable_page_level_ads: true
+});
+</script>
+</head>
+
+<nav class="navbar is-transparent">
+  <!-- <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div> -->
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item"  id="account_btn" onclick="redirectAccount()">
+        My Account
+      </a>
+      <a class="navbar-item"  id="logout_btn" onclick="logout()">
+        Sign Out
+      </a>
+      <a class="navbar-item" onclick="startModal()">
+        Feedback
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="button is-info" onclick="downloadResume()">
+              <span class="icon">
+                <i class="fa fa-download"></i>
+              </span>
+              <span>Download Resume</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal" id="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Thanks for your feedback, it helps us improve</p>
+      <button class="delete" aria-label="close" onclick="endModal()"></button>
+    </header>
+    <section class="modal-card-body">
+    <input class="input" id="feedback" placeholder="Enter feedback here"></input>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" onclick="sendFeedback()">Send feedback</button>
+      <button class="button" onclick="endModal()">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<body onload="populateTable();loadFooter();hideAnalysis()">
+<div class="container">
+<figure class="image is-128x128" style="display:block;margin:auto;margin-top:64px">
+  <img src="Images/cityscape.png">
+</figure>
+<p class="title" style="text-align: center;margin-top:48px;">
+Beat the bot. Get the interview.
+</p>
+
+<div class="field is-grouped is-grouped-centered" style="margin-top:96px;" >
+<div class="field" style="border:0 ;width:700px">
+  <p class="control has-icons-left has-icons-right">
+    <input class="input" type="search" placeholder="Application link of company Ex. (facebook.com/careers/jobs/a0I1200000IAGYKEA5/)" id="search_trial">
+    <span class="icon is-small is-left">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="icon is-small is-right">
+      <i class="fa fa-check"></i>
+    </span>
+  </p>
+</div>
+<div class="field" style="border:0 ;width:300px;margin-left:16px">
+  <p class="control has-icons-left">
+    <input class="input" type="search" placeholder="Enter Company Name" id="company_trial">
+    <span class="icon is-small is-left">
+      <i class="fa fa-building"></i>
+    </span>
+  </p>
+</div>
+<div class="field" >
+  <p class="control">
+    <button class="button is-info" style="text-align:center; margin-left:16px" id="analysisBtn" onclick="requestAnalysis()">Request Analysis</button>
+  </p>
+</div>
+</div>
+
+<p class="subtitle" style="margin-top:5%;">
+Don't just beat the bot, secure an opportunity. <a href="index.html">Find out how.</a>
+</p>
+<p style="font-size:24px;margin-top:5%">My Recent Searches: </p>
+<div id = "rootContainer" style="margin:auto;display:block">
+<table class="table" id="jobs" style="width:90%;">
+  <tr id="row"></tr>
+</table>
+</div>
+
+
+<div class="card" style=";height:283px;width: 100%;background: #ffffff;box-shadow: 1px 4px 8px 2px rgba(0,0,0,0.2);margin: 0 auto;margin-top:5%;" id="bot_pass">
+  <h1 style="text-align: center;font-family: Helvetica;padding-top:8px;font-weight:lighter;padding-top:12px;font-size:28px">Application Tracking System: <b>Clear!</b></h1>
+  <figure class="image is-96x96" style="margin:auto;display:block;margin-top:16px">
+  <img  src="Images/checked2.png">
+</figure>
+  <p style="text-align: center;font-family: Helvetica;padding-top:4x;font-weight:lighter;font-size:20px;margin-top:16px">Your resume seems free of errors an ATS system would catch</p>
+  <div style="margin: 0 auto;width:500px;height:100px; text-align: center;" >
+  <a class= "button is-primary" id = "homeResume" onclick="downloadResume()">Download resume</a>
+  <button  class= "button is-primary" id = "coverResume" onclick="redirectAccount()">Upload resume</button>
+</div>
+</div>
+
+<div class="card" style=";height:283px;width: 100%;background: #ffffff;box-shadow: 1px 4px 8px 2px rgba(0,0,0,0.2);margin: 0 auto;margin-top:5%;" id="bot_fail">
+  <h1 id="botHeader" style="text-align: center;font-family: Helvetica;padding-top:8px;font-weight:lighter;padding-top:12px;font-size:28px;">Application Tracking System: Found <b>Error</b></h1>
+  <figure class="image is-96x96" style="margin:auto;display:block;margin-top:16px">
+  <img  src="Images/warning.png">
+</figure>
+  <p id="botMessage" style="text-align: center;font-family: Helvetica;padding-top:4x;font-weight:lighter;font-size:20px;margin-top:16px">Here's what we caught: Don't Use Personal Pronouns</p>
+  <div style="margin: 0 auto;width:500px;height:100px; text-align: center;" >
+  <a class= "button is-primary" id = "homeResume" onclick="downloadResume()">Download resume</a>
+  <button  class= "button is-primary" id = "coverResume" onclick="redirectAccount()">Upload resume</button>
+</div>
+</div>
+<div class = "analysis" id="analysis">
+<div class = "banner">
+<h1 id="banner_title" style="font-size:28px;text-align:left;color:white;padding-left:16px;padding-top:16px;font-family: Helvetica;font-weight:bold;line-height:20px">#</h1>
+<h1 id="banner_website" style="text-align: left;color:white;padding-left:16px;font-family: Helvetica;font-weight:lighter;font-size:18px;">#</h1>
+<h1 id="banner_date" style="width:200px;text-align: left;color:white;padding-left:16px;font-family: Helvetica;font-weight:lighter;font-size:18px">#</h1>
+</div>
+<h1 style="margin-left:32px;font-family: Helvetica;text-align: left;font-weight:lighter;margin:16 px;font-size:20px">Overview:</h1>
+  <h1  id="overview" style="font-style:italic;font-family: Helvetica;text-align: left;font-weight:lighter;padding-top:24px;font-size:20px;padding-left:16px;line-height:40px;text-indent: 50px;"></h1>
+  <canvas id="myChart" width="400" height="100"></canvas>
+<br></br>
+<h1 class="subtitle" style="margin-left:32px">Relevant skills</h1>
+<span style="" id="tags">
+</span>
+<h1 style="float:right;padding-right:60px;font-weight:lighter;font-size:28px;font-family: Helvetica;line-height:40px" id="overall">Overall Score:<b>#</b></h1>
+</div>
+</div>
+</div>
+
+
+</body>
+<footer class="footer" style="margin-top:100px;">
+  <div id="footerArea">
+  </div>
+</footer>
+
+</html>

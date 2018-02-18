@@ -16,12 +16,11 @@ function loadFooter(){
       '<div class="content has-text-centered" >'+
       '  <p >'+
       '    <br></br>'+
-      '    <strong>Quest</strong> by <a href="https://github.com/Salad7">Mohamed Salad</a>. Suggestions? Feedback? Email me at <a href="mailto:msalad@uncc.edu">msalad@uncc.edu</a>.'+
+      '    <strong>Quest</strong> by <a href="https://github.com/Salad7/VTHacks">Lucky 9</a>.'+
       '  </p>'+
     '</div>'+
     '</div>'
 }
-
 function isSelectIndustry(){
   var soFlow = document.getElementById('soflow')
   if(soFlow.selectedIndex == 0){
@@ -347,22 +346,6 @@ function hideAnalysis(){
   analysis.style.display="none"
 }
 function botInspection(pass,message){
-  console.log("In botInspection")
-  if(pass==false){
-    document.getElementById("bot_pass").style.display = "none"
-    document.getElementById("bot_fail").style.display = "display"
-     document.getElementById("botHeader").innerHTML = "Application Tracking System: Found <b>Error</b>"
-     document.getElementById("botMessage").innerHTML = message
-
-  }
-  else{
-    document.getElementById("bot_pass").style.display = "display"
-    document.getElementById("bot_fail").style.display = "none"
-    document.getElementById("botHeader").innerHTML = "Application Tracking System: <b>Clear!</b>"
-    document.getElementById("botMessage").innerHTML = "Your resume seems free of errors an ATS system would catch"
-
-
-  }
 }
 function populateTable(){
   var database = firebase.database();
@@ -482,8 +465,9 @@ function populateTable(){
 }
 function viewAnalysis(score,overview,positives,suggestions,tags,jobTitle,date,website,userMentions,jobMentions){
   t = tags.split(",")
-
   var tagsSpan = document.getElementById("tags")
+  var microstrategy = document.getElementById("recommender")
+  microstrategy.style.display = "block"
   tagsSpan.innerHTML = ""
   if(t.length > 12){
     for(m = 1; m < 12; m++){
@@ -510,7 +494,7 @@ function viewAnalysis(score,overview,positives,suggestions,tags,jobTitle,date,we
       analysis = document.getElementById("analysis")
 
       doubleGraph(userMentions,jobMentions)
-
+      getRecommendedJobs()
 }
 function updateAccount(){
   if(isSelectIndustry() == false){
@@ -766,4 +750,35 @@ function coverPopup(){
 }
 function resumePopup(){
   alert('uploaded resume')
+}
+
+function getRecommendedJobs(){
+  //alert("Hit Get Recommendations")
+  firebase.database().ref('/Recommend/').once('value').then(function(snapshot) {
+      var listOfItems = snapshot.val()
+      var title_rec = document.getElementById("rec_1_title")
+      var sub_rec = document.getElementById("rec_1_subtitle")
+      title_rec.innerHTML = listOfItems[0][0]
+      sub_rec.innerHTML = "Tier "+listOfItems[0][1]+" Similarity"
+
+      var title_rec_2 = document.getElementById("rec_2_title")
+      var sub_rec_2 = document.getElementById("rec_2_subtitle")
+      title_rec_2.innerHTML = listOfItems[1][0]
+      sub_rec_2.innerHTML = "Tier "+listOfItems[1][1]+" Similarity"
+
+      var title_rec_3 = document.getElementById("rec_3_title")
+      var sub_rec_3 = document.getElementById("rec_3_subtitle")
+      title_rec_3.innerHTML = listOfItems[2][0]
+      sub_rec_3.innerHTML = "Tier "+listOfItems[2][1]+" Similarity"
+
+      var title_rec_4 = document.getElementById("rec_4_title")
+      var sub_rec_4 = document.getElementById("rec_4_subtitle")
+      title_rec_4.innerHTML = listOfItems[3][0]
+      sub_rec_4.innerHTML = "Tier "+listOfItems[3][1]+" Similarity"
+
+      var title_rec_5 = document.getElementById("rec_5_title")
+      var sub_rec_5 = document.getElementById("rec_5_subtitle")
+      title_rec_5.innerHTML = listOfItems[4][0]
+      sub_rec_5.innerHTML = "Tier "+listOfItems[4][1]+" Similarity"
+  });
 }
