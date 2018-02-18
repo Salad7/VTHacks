@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+<script src="JS/firebaseCalls.js"></script>
+<script src="JS/methods.js"></script>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<!--asnalytics-->
+<link rel="stylesheet" href="css/circle.css">
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+<!-- <script src="server.js"></script> -->
+<script src="JS/methods.js"></script>
+<script src="JS/graph-plot.js"></script>
+<script>
+var config = {
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+    apiKey: "AIzaSyD5m4M9WxvtSzXoLJwE0HCNBa10542IN-g",
+    authDomain: "app-l-133e5.firebaseapp.com",
+    databaseURL: "https://app-l-133e5.firebaseio.com",
+    projectId: "app-l-133e5",
+    storageBucket: "app-l-133e5.appspot.com",
+    messagingSenderId: "939170253210"
+  };
+  firebase.initializeApp(config);
+  storage = firebase.storage;
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "ca-pub-123456789",
+enable_page_level_ads: true
+});
+</script>
+</head>
+
+<nav class="navbar is-transparent">
+  <!-- <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div> -->
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<body onload="populateTable();loadFooter();hideAnalysis()">
+<div class="container">
+<figure class="image is-128x128" style="display:block;margin:auto;margin-top:64px;width:156px;height:156px;">
+  <img src="https://vthacks.com/static/img/splash-neon-sign-logo.4e448b7.svg">
+</figure>
+<p class="title" style="text-align: center;margin-top:48px;">
+Don't get rejected by a bot.
+</p>
+
+<div class="field is-grouped is-grouped-centered" style="margin-top:96px;" >
+<div class="field" style="border:0 ;width:700px">
+  <p class="control has-icons-left has-icons-right">
+    <input class="input" type="search" placeholder="Application link of company Ex. (facebook.com/careers/jobs/a0I1200000IAGYKEA5/)" id="search">
+    <span class="icon is-small is-left">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="icon is-small is-right">
+      <i class="fa fa-check"></i>
+    </span>
+  </p>
+</div>
+<div class="field" style="border:0 ;width:300px;margin-left:16px">
+  <p class="control has-icons-left">
+    <input class="input" type="search" placeholder="Enter Company Name" id="company">
+    <span class="icon is-small is-left">
+      <i class="fa fa-building"></i>
+    </span>
+  </p>
+</div>
+<div class="field" >
+  <p class="control">
+    <button class="button is-info" style="text-align:center; margin-left:16px" id="analysisBtn" onclick="requestAnalysis()">Request Analysis</button>
+  </p>
+</div>
+</div>
+
+<p class="subtitle" style="margin-top:5%;">
+</p>
+<p style="font-size:24px;margin-top:5%">Jobs that I Applied for: </p>
+<div id = "rootContainer" style="margin:auto;display:block">
+<table class="table" id="jobs" style="width:1400;  overflow-x:auto; ">
+  <tr id="row"></tr>
+</table>
+<div class="card" id=noCards style="width:1400px;height:336px; display:none">
+  <div  style="margin:auto;display:block;padding-top:70px">
+  <h1 class="title has-text-centered">Looks like you haven't requested analysis yet</h1>
+  <figure class="image is-96x96" style="margin:auto;display:block;margin-top:16px">
+  <img  src="Images/repairing.png">
+</figure>
+  <h2 class="subtitle has-text-centered" style="margin-top:16px">To get started, enter the website link and company name at the top</h2>
+</div>
+</div>
+</div>
+
+
+<div class = "card" style="width: 100%;height: 850px ;background: #ffffff;box-shadow: 1px 4px 8px 2px rgba(0,0,0,0.2);margin: 0 auto;margin-top:5%;" id="analysis">
+<div class = "card" style="width: 100%;height: 140px;background: #448aff;margin: 0 auto;">
+<h1 id="banner_title" style="font-size:28px;text-align:left;color:white;padding-left:16px;padding-top:16px;font-family: Helvetica;font-weight:bold;line-height:20px">#</h1>
+<h1 id="banner_website" style="text-align: left;color:white;padding-left:16px;font-family: Helvetica;font-weight:lighter;font-size:18px;">#</h1>
+<h1 id="banner_date" style="width:200px;text-align: left;color:white;padding-left:16px;font-family: Helvetica;font-weight:lighter;font-size:18px">#</h1>
+</div>
+<h1 style="margin-left:32px;font-family: Helvetica;text-align: left;font-weight:lighter;margin:16 px;font-size:20px">Overview:</h1>
+  <h1  id="overview" style="font-style:italic;font-family: Helvetica;text-align: left;font-weight:lighter;padding-top:24px;font-size:20px;padding-left:16px;line-height:40px;text-indent: 50px;"></h1>
+  <canvas id="myChart" width="400" height="100"></canvas>
+<br></br>
+<h1 class="subtitle" style="margin-left:32px">Relevant skills</h1>
+<span style="" id="tags">
+</span>
+<h1 style="float:right;padding-right:60px;font-weight:lighter;font-size:28px;font-family: Helvetica;line-height:40px" id="overall">Overall Score:<b>#</b></h1>
+</div>
+</div>
+</div>
+<br>
+<div id="recommender" style="display:none">
+<div style="text-align: center;">
+	<iframe width="720px" height="680px" src="https://env-83226.customer.cloud.microstrategy.com:443/MicroStrategy/servlet/mstrWeb?evt=3186&src=mstrWeb.3186&subscriptionID=A4D41AA211E8143F406F0080EF558C95&Server=ENV-83226LAIOUSE1&Project=MicroStrategy%20Tutorial&Port=0&share=1&hiddensections=header,path,dockTop,dockLeft,footer"></iframe>
+</div>
+<br>
+<h1 style="font-size:24px;margin-top:5%;text-align: center;vertical-align: middle;">Recommended Jobs:</h1><br>
+<div class="columns">
+  <div class="column">
+    <div class="box" style="margin-left: 15px; margin-top: 15px;">
+      <p id="rec_1_title" class="title is-5"></p>
+      <p id="rec_1_subtitle" class="subtitle"><br></p>
+	  <a class="button is-primary" href="https://boards.greenhouse.io/acorns/jobs/100797?gh_jid=100797#.Wok5RxPyvow">Visit</a>
+    </div>
+  </div>
+    <div class="column"style="margin-top: 15px;">
+    <div class="box">
+      <p id="rec_2_title" class="title is-5"></p>
+      <p id="rec_2_subtitle" class="subtitle"><br></p>
+	  <a class="button is-primary" href="https://www.microstrategy.com/us/company/careers/job-openings">Visit</a>
+    </div>
+  </div>
+    <div class="column"style="margin-top: 15px;">
+    <div class="box">
+      <p id="rec_3_title" class="title is-5"></p>
+      <p id="rec_3_subtitle" class="subtitle"></p>
+	  <a class="button is-primary" href="https://boards.greenhouse.io/github/jobs/788688#.Wokc8RPyvow">Visit</a>
+    </div>
+  </div>
+    <div class="column"style="margin-top: 15px;">
+    <div class="box">
+      <p id="rec_4_title" class="title is-5" ></p>
+      <p id="rec_4_subtitle" class="subtitle"></p>
+	  <a class="button is-primary" href="https://www.facebook.com/careers/jobs/a0I1H00000LC5mkUAD/?q=software%20engineer&location=menlo-park">Visit</a>
+    </div>
+  </div>
+    <div class="column" style="margin-right: 15px; margin-top: 15px;">
+    <div class="box">
+      <p id="rec_5_title" class="title is-5"></p>
+      <p id="rec_5_subtitle" class="subtitle"></p>
+	  <a class="button is-primary" href="https://www.facebook.com/">Visit</a>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</body>
+
+</body>
+<footer class="footer" style="margin-top:100px;">
+  <div id="footerArea">
+  </div>
+</footer>
+
+</html>
